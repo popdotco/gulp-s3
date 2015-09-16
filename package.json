@@ -1,14 +1,15 @@
 {
-  "name": "gulp-s3",
+  "name": "gulp-s3-gzip",
   "version": "0.3.0",
-  "description": "A plugin for Gulp that uploads files to s3",
+  "description": "A plugin for Gulp that uploads files to s3 (now with better GZip support)",
   "keywords": [
     "gulpplugin",
     "gulp",
-    "s3"
+    "s3",
+    "gzip"
   ],
-  "homepage": "https://github.com/nkostelnik/gulp-s3",
-  "bugs": "https://github.com/nkostelnik/gulp-s3/issues",
+  "homepage": "https://github.com/popdotco/gulp-s3-gzip",
+  "bugs": "https://github.com/popdotco/gulp-s3-gzip/issues",
   "author": {
     "name": "Nicholas Kostelnik",
     "email": "",
@@ -17,7 +18,7 @@
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nkostelnik/gulp-s3.git"
+    "url": "git://github.com/popdotco/gulp-s3-gzip.git"
   },
   "scripts": {
     "test": "mocha"
@@ -40,7 +41,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/nkostelnik/gulp-s3/blob/master/LICENSE"
+      "url": "https://github.com/popdotco/gulp-s3-gzip/blob/master/LICENSE"
     }
   ]
 }
