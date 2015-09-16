@@ -4,10 +4,10 @@
 
 ## Usage
 
-First, install `gulp-s3` as a development dependency:
+First, install `gulp-s3-gzip` as a development dependency:
 
 ```shell
-npm install --save-dev gulp-s3
+npm install --save-dev gulp-s3-gzip
 ```
 
 Setup your aws.json file
@@ -22,7 +22,7 @@ Setup your aws.json file
 
 Then, use it in your `gulpfile.js`:
 ```javascript
-var s3 = require("gulp-s3");
+var s3 = require("gulp-s3-gzip");
 
 aws = JSON.parse(fs.readFileSync('./aws.json'));
 gulp.src('./dist/**')
@@ -66,7 +66,7 @@ Only upload files with .gz extension, additionally it will remove the .gz suffix
 
 ```javascript
 var gulp = require("gulp");
-var s3 = require("gulp-s3");
+var s3 = require("gulp-s3-gzip");
 var gzip = require("gulp-gzip");
 var options = { gzippedOnly: true };
 
@@ -81,5 +81,5 @@ gulp.src('./dist/**')
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
-[npm-url]: https://npmjs.org/package/gulp-s3
-[npm-image]: https://badge.fury.io/js/gulp-s3.png
+[npm-url]: https://npmjs.org/package/gulp-s3-gzip
+[npm-image]: https://badge.fury.io/js/gulp-s3-gzip.png
