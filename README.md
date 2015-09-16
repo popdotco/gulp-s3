@@ -45,6 +45,18 @@ gulp.src('./dist/**', {read: false})
     .pipe(s3(aws, options));
 ```
 
+#### options.removeGzipExtension
+
+Type: `Boolean`
+Default: `false`
+
+When handling uploading assets to S3, the build should be able to decide whether or not to remove any `.gz` extensions from gzipped files. The decision to add this flag stems from the documentation Amazon provides on [Serving Compressed Files from Amazon S3](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html#CompressedS3). To summarize:
+
+> Amazon S3 doesn't automatically compress files as web servers do. If you want to serve compressed content and 
+> you're using Amazon S3 as your origin, you need to store compressed and uncompressed versions of your files in 
+> your Amazon S3 bucket. You also need to develop your application to intercept viewer requests and change the 
+> request URL based on whether the request includes an Accept-Encoding: gzip header.
+
 #### options.gzippedOnly
 
 Type: `Boolean`          
