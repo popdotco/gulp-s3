@@ -29,26 +29,35 @@ module.exports = function (aws, options) {
               headers[key] = options.headers[key];
           }
       }
-
+      
+      var hasGzipExtension = false;
       if (regexGzip.test(file.path)) {
           // Set proper encoding for gzipped files, remove .gz suffix
           headers['Content-Encoding'] = 'gzip';
           
           if (options.removeGzipExtension) {
             uploadPath = uploadPath.substring(0, uploadPath.length - 3);
+          } else {
+            hasGzipExtension = true;
           }
       } else if (options.gzippedOnly) {
-          // Ignore non-gzipped files
-          return file;
+        // Ignore non-gzipped files
+        return file;
+      }
+      
+      // special case file extension handler for .gzipped files
+      var sanitizedUploadPath = uploadPath;
+      if (hasGzipExtension) {
+        sanitizedUploadPath = uploadPath.substring(0, uploadPath.length - 3);
       }
 
       // Set content type based of file extension
-      if (!headers['Content-Type'] && regexGeneral.test(uploadPath)) {
-        headers['Content-Type'] = mime.lookup(uploadPath);
+      if (!headers['Content-Type'] && regexGeneral.test(sanitizedUploadPath)) {
+        headers['Content-Type'] = mime.lookup(sanitizedUploadPath);
         if (options.encoding) {
           headers['Content-Type'] += '; charset=' + options.encoding;
         }
-      }
+      } 
 
       headers['Content-Length'] = file.stat.size;
 
