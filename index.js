@@ -13,8 +13,8 @@ module.exports = function (aws, options) {
 
   var client = knox.createClient(aws);
   var waitTime = 0;
-  var regexGzip = /\.([a-z]{2,})\.gz$/i;
-  var regexGeneral = /\.([a-z]{2,})$/i;
+  var regexGzip = /\.([a-z0-9]{2,})\.gz$/i;
+  var regexGeneral = /\.([a-z0-9]{2,})$/i;
 
   return es.mapSync(function (file) {
 
@@ -29,12 +29,12 @@ module.exports = function (aws, options) {
               headers[key] = options.headers[key];
           }
       }
-      
+
       var hasGzipExtension = false;
       if (regexGzip.test(file.path)) {
           // Set proper encoding for gzipped files, remove .gz suffix
           headers['Content-Encoding'] = 'gzip';
-          
+
           if (options.removeGzipExtension) {
             uploadPath = uploadPath.substring(0, uploadPath.length - 3);
           } else {
@@ -44,7 +44,7 @@ module.exports = function (aws, options) {
         // Ignore non-gzipped files
         return file;
       }
-      
+
       // special case file extension handler for .gzipped files
       var sanitizedUploadPath = uploadPath;
       if (hasGzipExtension) {
@@ -57,7 +57,7 @@ module.exports = function (aws, options) {
         if (options.encoding) {
           headers['Content-Type'] += '; charset=' + options.encoding;
         }
-      } 
+      }
 
       headers['Content-Length'] = file.stat.size;
 
